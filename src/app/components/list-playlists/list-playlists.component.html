@@ -1,0 +1,24 @@
+<div *ngFor="let playlist of playlists" class="playlist-container">
+  <h3>{{ playlist.nome }}</h3>
+  <p>{{ playlist.descricao }}</p>
+  <table class="playlist-table">
+    <thead>
+    <tr>
+      <th>Título</th>
+      <th>Artista</th>
+      <th>Álbum</th>
+      <th>Ano</th>
+      <th>Gênero</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let musica of playlist.musicas">
+      <td>{{ musica.titulo }}</td>
+      <td>{{ musica.artista }}</td>
+      <td>{{ musica.album }}</td>
+      <td>{{ musica.ano }}</td>
+      <td>{{ musica.genero }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

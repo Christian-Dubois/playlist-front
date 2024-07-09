@@ -1,0 +1,27 @@
+.playlist-container {
+  margin-bottom: 20px;
+}
+
+.playlist-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.playlist-table th, .playlist-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.playlist-table th {
+  background-color: #f2f2f2;
+}
+
+.playlist-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.playlist-table tr:hover {
+  background-color: #f1f1f1;
+}

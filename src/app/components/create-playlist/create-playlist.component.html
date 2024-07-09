@@ -1,0 +1,72 @@
+<form [formGroup]="playlistForm" (ngSubmit)="criarPlaylist()">
+  <table>
+    <thead>
+    <tr>
+      <th>Nome da Playlist</th>
+      <th>Descrição</th>
+      <th>Músicas</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>
+        <label for="nome">Nome da Playlist:</label>
+        <input type="text" id="nome" formControlName="nome">
+        <div *ngIf="playlistForm.get('nome')?.invalid && playlistForm.get('nome')?.touched">
+          Nome da Playlist é obrigatório.
+        </div>
+      </td>
+      <td>
+        <label for="descricao">Descrição:</label>
+        <textarea id="descricao" formControlName="descricao"></textarea>
+      </td>
+      <td>
+        <div formArrayName="musicas">
+          <table>
+            <thead>
+            <tr>
+              <th>Título</th>
+              <th>Artista</th>
+              <th>Álbum</th>
+              <th>Ano</th>
+              <th>Gênero</th>
+              <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let musica of musicas.controls; let i = index" [formGroupName]="i">
+              <td>
+                <input type="text" formControlName="titulo">
+                <div *ngIf="musica.get('titulo')?.invalid && musica.get('titulo')?.touched">
+                  Título da música é obrigatório.
+                </div>
+              </td>
+              <td>
+                <input type="text" formControlName="artista">
+              </td>
+              <td>
+                <input type="text" formControlName="album">
+              </td>
+              <td>
+                <input type="text" formControlName="ano">
+              </td>
+              <td>
+                <input type="text" formControlName="genero">
+              </td>
+              <td>
+                <button type="button" (click)="removerMusica(i)">Remover Música</button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <div>
+            <button type="button" (click)="adicionarMusica()">Adicionar Nova Música</button>
+          </div>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <button type="submit" [disabled]="playlistForm.invalid">Criar Playlist</button>
+</form>
