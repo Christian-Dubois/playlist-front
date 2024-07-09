@@ -1,5 +1,5 @@
 <form [formGroup]="playlistForm" (ngSubmit)="criarPlaylist()">
-  <table>
+  <table class="playlist-table">
     <thead>
     <tr>
       <th>Nome da Playlist</th>
@@ -12,7 +12,7 @@
       <td>
         <label for="nome">Nome da Playlist:</label>
         <input type="text" id="nome" formControlName="nome">
-        <div *ngIf="playlistForm.get('nome')?.invalid && playlistForm.get('nome')?.touched">
+        <div *ngIf="playlistForm.get('nome')?.invalid && playlistForm.get('nome')?.touched" class="error-message">
           Nome da Playlist é obrigatório.
         </div>
       </td>
@@ -22,7 +22,7 @@
       </td>
       <td>
         <div formArrayName="musicas">
-          <table>
+          <table class="playlist-table">
             <thead>
             <tr>
               <th>Título</th>
@@ -37,7 +37,7 @@
             <tr *ngFor="let musica of musicas.controls; let i = index" [formGroupName]="i">
               <td>
                 <input type="text" formControlName="titulo">
-                <div *ngIf="musica.get('titulo')?.invalid && musica.get('titulo')?.touched">
+                <div *ngIf="musica.get('titulo')?.invalid && musica.get('titulo')?.touched" class="error-message">
                   Título da música é obrigatório.
                 </div>
               </td>
