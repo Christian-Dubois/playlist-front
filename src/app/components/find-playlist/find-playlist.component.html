@@ -1,0 +1,46 @@
+<form [formGroup]="findPlaylistForm" (ngSubmit)="findPlaylist()">
+  <table>
+    <thead>
+    <tr>
+      <th>Nome da Playlist</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>
+        <label for="listName">Nome da Playlist:</label>
+        <input type="text" id="listName" formControlName="listName">
+        <div *ngIf="findPlaylistForm.get('listName')?.invalid && findPlaylistForm.get('listName')?.touched">
+          <em>Nome da Playlist é obrigatório.</em>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <button type="submit" [disabled]="findPlaylistForm.invalid">Buscar Playlist</button>
+</form>
+
+<div *ngIf="foundPlaylist">
+  <h3>{{ foundPlaylist.nome }}</h3>
+  <p>{{ foundPlaylist.descricao }}</p>
+  <table>
+    <thead>
+    <tr>
+      <th>Título</th>
+      <th>Artista</th>
+      <th>Álbum</th>
+      <th>Ano</th>
+      <th>Gênero</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let musica of foundPlaylist.musicas">
+      <td>{{ musica.titulo }}</td>
+      <td>{{ musica.artista }}</td>
+      <td>{{ musica.album }}</td>
+      <td>{{ musica.ano }}</td>
+      <td>{{ musica.genero }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

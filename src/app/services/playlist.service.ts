@@ -7,15 +7,25 @@ import { Playlist } from '../models/playlist.model';
   providedIn: 'root'
 })
 export class PlaylistService {
-  private apiUrl = 'http://localhost:8080/api/playlist/lists';
+  private baseURL = 'http://localhost:8080/api/playlist/lists';
 
   constructor(private http: HttpClient) { }
 
   getPlaylists(): Observable<{ playlists: Playlist[] }> {
-    return this.http.get<{ playlists: Playlist[] }>(this.apiUrl);
+    return this.http.get<{ playlists: Playlist[] }>(this.baseURL);
   }
 
   createPlaylist(playlist: Playlist): Observable<any> {
-    return this.http.post<any>(this.apiUrl, playlist);
+    return this.http.post<any>(this.baseURL, playlist);
+  }
+
+  getPlaylistByName(listName: string): Observable<{ playlist: Playlist }> {
+    const url = `${this.baseURL}/?listName=${listName}`;
+    return this.http.get<{ playlist: Playlist }>(url);
+  }
+
+  deletePlaylist(playlistId: string): Observable<any> {
+    const deleteUrl = `${this.baseURL}/${playlistId}`;
+    return this.http.delete<any>(deleteUrl);
   }
 }
