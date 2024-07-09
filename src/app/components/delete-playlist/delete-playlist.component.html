@@ -1,0 +1,9 @@
+<div>
+  <h2>Deletar Playlist</h2>
+  <label for="playlistSelect">Selecione a Playlist:</label>
+  <select id="playlistSelect" (change)="selectPlaylist($event.target.value)">
+    <option value="">Selecione...</option>
+    <option *ngFor="let playlist of playlists" [value]="playlist.id">{{ playlist.nome }}</option>
+  </select>
+  <button type="button" (click)="deletePlaylist()">Deletar Playlist</button>
+</div>

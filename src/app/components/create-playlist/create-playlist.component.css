@@ -1,46 +1,52 @@
-.playlist-container {
+table {
+  width: 100%;
+  border-collapse: collapse;
   margin-bottom: 20px;
 }
 
-.playlist-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
+table, th, td {
+  border: 1px solid black;
 }
 
-.playlist-table th, .playlist-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
+th, td {
+  padding: 10px;
   text-align: left;
-  vertical-align: middle;
+  vertical-align: middle; /* Centraliza verticalmente */
 }
 
-.playlist-table th {
+th {
   background-color: #f2f2f2;
-  text-align: center;
-  vertical-align: middle;
 }
 
-.playlist-table tr:nth-child(even) {
-  background-color: #f9f9f9;
+form {
+  margin-bottom: 20px;
 }
 
-.playlist-table tr:hover {
-  background-color: #f1f1f1;
+input[type="text"], textarea {
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
 }
 
-.playlist-table label {
-  display: inline-block;
-  margin-right: 5px;
+label {
+  display: block;
+  margin-bottom: 5px;
 }
 
-.playlist-table input[type="text"],
-.playlist-table textarea {
-  width: 90%;
+em {
+  color: red;
+  font-style: italic;
+  font-size: 0.9em;
+}
+
+.success-message {
+  color: green;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .error-message {
   color: red;
-  font-style: italic;
-  font-size: 0.9em;
+  font-weight: bold;
+  margin-bottom: 10px;
 }

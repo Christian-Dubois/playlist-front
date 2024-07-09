@@ -1,5 +1,8 @@
+<div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+<div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
 <form [formGroup]="playlistForm" (ngSubmit)="criarPlaylist()">
-  <table class="playlist-table">
+  <table>
     <thead>
     <tr>
       <th>Nome da Playlist</th>
@@ -12,8 +15,8 @@
       <td>
         <label for="nome">Nome da Playlist:</label>
         <input type="text" id="nome" formControlName="nome">
-        <div *ngIf="playlistForm.get('nome')?.invalid && playlistForm.get('nome')?.touched" class="error-message">
-          Nome da Playlist é obrigatório.
+        <div *ngIf="playlistForm.get('nome')?.invalid && playlistForm.get('nome')?.touched">
+          <em>Nome da Playlist é obrigatório.</em>
         </div>
       </td>
       <td>
@@ -21,8 +24,9 @@
         <textarea id="descricao" formControlName="descricao"></textarea>
       </td>
       <td>
+        <button type="button" (click)="adicionarMusica()">Adicionar Nova Música</button>
         <div formArrayName="musicas">
-          <table class="playlist-table">
+          <table *ngIf="musicas.length > 0">
             <thead>
             <tr>
               <th>Título</th>
@@ -37,8 +41,8 @@
             <tr *ngFor="let musica of musicas.controls; let i = index" [formGroupName]="i">
               <td>
                 <input type="text" formControlName="titulo">
-                <div *ngIf="musica.get('titulo')?.invalid && musica.get('titulo')?.touched" class="error-message">
-                  Título da música é obrigatório.
+                <div *ngIf="musica.get('titulo')?.invalid && musica.get('titulo')?.touched">
+                  <em>Título da música é obrigatório.</em>
                 </div>
               </td>
               <td>
@@ -59,9 +63,6 @@
             </tr>
             </tbody>
           </table>
-          <div>
-            <button type="button" (click)="adicionarMusica()">Adicionar Nova Música</button>
-          </div>
         </div>
       </td>
     </tr>

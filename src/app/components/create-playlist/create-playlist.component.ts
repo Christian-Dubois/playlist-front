@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { PlaylistService } from '../../services/playlist.service';
 import { Playlist } from '../../models/playlist.model';
 
@@ -8,8 +8,10 @@ import { Playlist } from '../../models/playlist.model';
   templateUrl: './create-playlist.component.html',
   styleUrls: ['./create-playlist.component.css']
 })
-export class CreatePlaylistComponent implements OnInit {
+export class CreatePlaylistComponent {
   playlistForm: FormGroup;
+  successMessage: string | null = null;
+  errorMessage: string | null = null;
 
   constructor(private fb: FormBuilder, private playlistService: PlaylistService) {
     this.playlistForm = this.fb.group({
@@ -19,16 +21,19 @@ export class CreatePlaylistComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    // Lógica de inicialização que pode ser executada durante o OnInit, se necessário
+  get musicas(): FormArray {
+    return this.playlistForm.get('musicas') as FormArray;
   }
 
   adicionarMusica(): void {
-    const musicasArray = this.playlistForm.get('musicas') as FormArray;
-    musicasArray.push(this.criarMusicaFormGroup());
+    this.musicas.push(this.createMusicaGroup());
   }
 
-  criarMusicaFormGroup(): FormGroup {
+  removerMusica(index: number): void {
+    this.musicas.removeAt(index);
+  }
+
+  createMusicaGroup(): FormGroup {
     return this.fb.group({
       titulo: ['', Validators.required],
       artista: [''],
@@ -38,30 +43,24 @@ export class CreatePlaylistComponent implements OnInit {
     });
   }
 
-  removerMusica(index: number): void {
-    const musicasArray = this.playlistForm.get('musicas') as FormArray;
-    musicasArray.removeAt(index);
-  }
-
   criarPlaylist(): void {
-    if (this.playlistForm.valid) {
-      const novaPlaylist = this.playlistForm.value as Playlist;
-      this.playlistService.createPlaylist(novaPlaylist).subscribe(
-        (response) => {
-          console.log('Playlist criada com sucesso!', response);
-          // ToDo: Adicionar mensagem de sucesso
-        },
-        (error: any) => {
-          console.error('Erro ao criar playlist:', error);
-          // ToDo: Adicionar mensagem de erro
-        }
-      );
-    } else {
-      console.error('Formulário inválido. Verifique os campos obrigatórios.');
+    if (this.playlistForm.invalid) {
+      this.errorMessage = 'Preencha corretamente todos os campos obrigatórios.';
+      return;
     }
-  }
 
-  get musicas(): FormArray {
-    return this.playlistForm.get('musicas') as FormArray;
+    const playlist: Playlist = this.playlistForm.value;
+
+    this.playlistService.createPlaylist(playlist).subscribe(
+      (response) => {
+        this.successMessage = 'Playlist criada com sucesso!';
+        this.errorMessage = null;
+        this.playlistForm.reset();
+      },
+      (error) => {
+        this.errorMessage = 'Erro ao criar playlist. Tente novamente.';
+        console.error('Erro ao criar playlist:', error);
+      }
+    );
   }
 }
