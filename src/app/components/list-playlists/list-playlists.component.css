@@ -2,26 +2,32 @@
   margin-bottom: 20px;
 }
 
-.playlist-table {
+.musics-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
 }
 
-.playlist-table th, .playlist-table td {
+.musics-table th, .musics-table td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
 }
 
-.playlist-table th {
+.musics-table th {
   background-color: #f2f2f2;
 }
 
-.playlist-table tr:nth-child(even) {
+.musics-table tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
-.playlist-table tr:hover {
+.musics-table tr:hover {
   background-color: #f1f1f1;
+}
+
+.error-message {
+  color: red;
+  font-style: italic;
+  font-size: 0.9em;
 }

@@ -1,7 +1,15 @@
 <div *ngFor="let playlist of playlists" class="playlist-container">
-  <h3>{{ playlist.nome }}</h3>
-  <p>{{ playlist.descricao }}</p>
   <table class="playlist-table">
+    <tr>
+      <td>Nome:</td>
+      <td><h3>{{ playlist.nome }}</h3></td>
+    </tr>
+    <tr>
+      <td>Descrição:</td>
+      <td>{{ playlist.descricao }}</td>
+    </tr>
+  </table>
+  <table class="musics-table">
     <thead>
     <tr>
       <th>Título</th>
@@ -12,13 +20,20 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let musica of playlist.musicas">
-      <td>{{ musica.titulo }}</td>
-      <td>{{ musica.artista }}</td>
-      <td>{{ musica.album }}</td>
-      <td>{{ musica.ano }}</td>
-      <td>{{ musica.genero }}</td>
-    </tr>
+    <ng-container *ngIf="playlist.musicas && playlist.musicas.length > 0; else noMusicas">
+      <tr *ngFor="let musica of playlist.musicas">
+        <td>{{ musica.titulo }}</td>
+        <td>{{ musica.artista }}</td>
+        <td>{{ musica.album }}</td>
+        <td>{{ musica.ano }}</td>
+        <td>{{ musica.genero }}</td>
+      </tr>
+    </ng-container>
+    <ng-template #noMusicas>
+      <tr class="error-message">
+        <td colspan="5">Nenhuma música encontrada nesta playlist.</td>
+      </tr>
+    </ng-template>
     </tbody>
   </table>
 </div>
