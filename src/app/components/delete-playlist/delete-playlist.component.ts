@@ -9,7 +9,7 @@ import { PlaylistService } from '../../services/playlist.service';
 })
 export class DeletePlaylistComponent implements OnInit {
   playlists: Playlist[] = [];
-  selectedPlaylistId: string | undefined;
+  selectedPlaylist: Playlist | null = null;
 
   constructor(private playlistService: PlaylistService) { }
 
@@ -29,16 +29,16 @@ export class DeletePlaylistComponent implements OnInit {
   }
 
   deletePlaylist(): void {
-    if (!this.selectedPlaylistId) {
+    if (!this.selectedPlaylist) {
       console.error('Nenhuma playlist selecionada para deletar.');
       return;
     }
 
-    this.playlistService.deletePlaylist(this.selectedPlaylistId).subscribe(
+    this.playlistService.deletePlaylist(this.selectedPlaylist.nome).subscribe(
       () => {
         console.log('Playlist deletada com sucesso.');
-        // Lógica para atualizar a lista de playlists após deletar, se necessário
-        this.loadPlaylists();
+        this.selectedPlaylist = null; // Limpa a playlist selecionada após a exclusão
+        this.loadPlaylists(); // Recarrega a lista de playlists após a exclusão
       },
       (error: any) => {
         console.error('Erro ao deletar playlist:', error);
@@ -46,7 +46,14 @@ export class DeletePlaylistComponent implements OnInit {
     );
   }
 
-  selectPlaylist(playlistId: string): void {
-    this.selectedPlaylistId = playlistId;
+  selectPlaylist(target: EventTarget | null): void {
+    this.playlistService.getPlaylistByName((target as HTMLInputElement).value).subscribe(
+      (playlist: Playlist) => {
+        this.selectedPlaylist = playlist;
+      },
+      (error: any) => {
+        console.error('Erro ao buscar playlist:', error);
+      }
+    );
   }
 }

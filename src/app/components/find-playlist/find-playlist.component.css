@@ -33,7 +33,7 @@ label {
   text-align: center;
 }
 
-em {
+.error-message {
   color: red;
   font-style: italic;
   font-size: 0.9em;

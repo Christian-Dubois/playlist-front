@@ -1,9 +1,34 @@
 <div>
   <h2>Deletar Playlist</h2>
   <label for="playlistSelect">Selecione a Playlist:</label>
-  <select id="playlistSelect" (change)="selectPlaylist($event.target.value)">
+  <select id="playlistSelect" (change)="selectPlaylist($event.target)">
     <option value="">Selecione...</option>
-    <option *ngFor="let playlist of playlists" [value]="playlist.id">{{ playlist.nome }}</option>
+    <option *ngFor="let playlist of playlists" [value]="playlist.nome">{{ playlist.nome }}</option>
   </select>
-  <button type="button" (click)="deletePlaylist()">Deletar Playlist</button>
+  <button type="button" (click)="deletePlaylist()" class="delete-button">Deletar Playlist</button>
+</div>
+
+<div *ngIf="selectedPlaylist">
+  <h3>{{ selectedPlaylist.nome }}</h3>
+  <p>{{ selectedPlaylist.descricao }}</p>
+  <table class="playlist-table">
+    <thead>
+    <tr>
+      <th>Título</th>
+      <th>Artista</th>
+      <th>Álbum</th>
+      <th>Ano</th>
+      <th>Gênero</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let musica of selectedPlaylist.musicas">
+      <td>{{ musica.titulo }}</td>
+      <td>{{ musica.artista }}</td>
+      <td>{{ musica.album }}</td>
+      <td>{{ musica.ano }}</td>
+      <td>{{ musica.genero }}</td>
+    </tr>
+    </tbody>
+  </table>
 </div>

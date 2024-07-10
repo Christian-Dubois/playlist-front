@@ -11,7 +11,7 @@
         <label for="listName">Nome da Playlist:</label>
         <input type="text" id="listName" formControlName="listName">
         <div *ngIf="findPlaylistForm.get('listName')?.invalid && findPlaylistForm.get('listName')?.touched">
-          <em>Nome da Playlist é obrigatório.</em>
+          <em class="error-message">Nome da Playlist é obrigatório.</em>
         </div>
       </td>
     </tr>
@@ -19,6 +19,10 @@
   </table>
   <button type="submit" [disabled]="findPlaylistForm.invalid">Buscar Playlist</button>
 </form>
+
+<div *ngIf="notFoundMessage" class="error-message">
+  <p>{{ notFoundMessage }}</p>
+</div>
 
 <div *ngIf="foundPlaylist">
   <h3>{{ foundPlaylist.nome }}</h3>

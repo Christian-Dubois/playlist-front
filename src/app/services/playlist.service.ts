@@ -19,13 +19,13 @@ export class PlaylistService {
     return this.http.post<any>(this.baseURL, playlist);
   }
 
-  getPlaylistByName(listName: string): Observable<{ playlist: Playlist }> {
+  getPlaylistByName(listName: string): Observable<Playlist> {
     const url = `${this.baseURL}/?listName=${listName}`;
-    return this.http.get<{ playlist: Playlist }>(url);
+    return this.http.get<Playlist>(url);
   }
 
-  deletePlaylist(playlistId: string): Observable<any> {
-    const deleteUrl = `${this.baseURL}/${playlistId}`;
+  deletePlaylist(listName: string): Observable<any> {
+    const deleteUrl = `${this.baseURL}/?listName=${listName}`;
     return this.http.delete<any>(deleteUrl);
   }
 }
