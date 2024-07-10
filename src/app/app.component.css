@@ -1,23 +1,41 @@
-ul {
+.page-title {
+  text-align: center;
+  font-size: 28px;
+  margin: 0;
+  background-color: #134f5c;
+  padding: 15px;
+  font-family: 'Arial', sans-serif;
+  color: white;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+ul.nav-menu {
   list-style-type: none;
   padding: 0;
-  background-color: #f2f2f2;
+  background-color: #45818e;
   overflow: hidden;
   margin-bottom: 40px;
 }
 
-li {
+ul.nav-menu li {
   float: left;
 }
 
-li a {
+ul.nav-menu li a {
   display: block;
-  color: black;
+  color: white;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
 }
 
-li a:hover {
-  background-color: #ddd;
+ul.nav-menu li a:hover {
+  background-color: #76a5af;
+}
+
+.separator {
+  background: #76a5af;
 }
