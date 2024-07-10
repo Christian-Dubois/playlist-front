@@ -18,7 +18,7 @@ export class DeletePlaylistComponent implements OnInit {
   }
 
   loadPlaylists(): void {
-    this.playlistService.getPlaylists().subscribe(
+    this.playlistService.findAllPlaylists().subscribe(
       (data: { playlists: Playlist[] }) => {
         this.playlists = data.playlists;
       },
@@ -47,7 +47,7 @@ export class DeletePlaylistComponent implements OnInit {
   }
 
   selectPlaylist(target: EventTarget | null): void {
-    this.playlistService.getPlaylistByName((target as HTMLInputElement).value).subscribe(
+    this.playlistService.findPlaylistByName((target as HTMLInputElement).value).subscribe(
       (playlist: Playlist) => {
         this.selectedPlaylist = playlist;
       },

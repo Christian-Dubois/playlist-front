@@ -11,7 +11,7 @@ export class PlaylistService {
 
   constructor(private http: HttpClient) { }
 
-  getPlaylists(): Observable<{ playlists: Playlist[] }> {
+  findAllPlaylists(): Observable<{ playlists: Playlist[] }> {
     return this.http.get<{ playlists: Playlist[] }>(this.baseURL);
   }
 
@@ -19,7 +19,7 @@ export class PlaylistService {
     return this.http.post<any>(this.baseURL, playlist);
   }
 
-  getPlaylistByName(listName: string): Observable<Playlist> {
+  findPlaylistByName(listName: string): Observable<Playlist> {
     const url = `${this.baseURL}/?listName=${listName}`;
     return this.http.get<Playlist>(url);
   }

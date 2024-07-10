@@ -13,7 +13,7 @@ export class ListPlaylistsComponent implements OnInit {
   constructor(private playlistService: PlaylistService) { }
 
   ngOnInit(): void {
-    this.playlistService.getPlaylists().subscribe(
+    this.playlistService.findAllPlaylists().subscribe(
       (data) => {
         this.playlists = data.playlists;
       },
