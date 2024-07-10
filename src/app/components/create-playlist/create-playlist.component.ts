@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { PlaylistService } from '../../services/playlist.service';
 import { Playlist } from '../../models/playlist.model';
 
@@ -45,22 +46,31 @@ export class CreatePlaylistComponent {
 
   criarPlaylist(): void {
     if (this.playlistForm.invalid) {
-      this.errorMessage = 'Preencha corretamente todos os campos obrigatórios.';
       return;
     }
 
     const playlist: Playlist = this.playlistForm.value;
 
     this.playlistService.createPlaylist(playlist).subscribe(
-      (response) => {
-        this.successMessage = 'Playlist criada com sucesso!';
-        this.errorMessage = null;
-        this.playlistForm.reset();
+      (response: HttpResponse<any>) => {
+        this.tratarRetornoDaAPI(response);
       },
-      (error) => {
-        this.errorMessage = 'Erro ao criar playlist. Tente novamente.';
-        console.error('Erro ao criar playlist:', error);
+      (error: HttpErrorResponse) => {
+        this.tratarRetornoDaAPI(error);
       }
     );
+  }
+
+  tratarRetornoDaAPI(response: HttpResponse<any> | HttpErrorResponse): void {
+    if (response.status === 201) {
+      this.successMessage = 'Playlist criada com sucesso!';
+      this.errorMessage = null;
+      this.musicas.clear();
+      this.playlistForm.reset();
+    } else {
+      console.error('Erro ao criar playlist:', response);
+      this.errorMessage = 'Não foi possível criar a playlist.';
+      this.successMessage = null;
+    }
   }
 }
