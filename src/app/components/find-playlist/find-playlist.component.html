@@ -1,5 +1,5 @@
-<form [formGroup]="findPlaylistForm" (ngSubmit)="findPlaylist()">
-  <table>
+<form [formGroup]="findPlaylistForm" (ngSubmit)="findPlaylist()" class="find-playlist-form">
+  <table class="form-table">
     <thead>
     <tr>
       <th>Nome da Playlist</th>
@@ -17,17 +17,17 @@
     </tr>
     </tbody>
   </table>
-  <button type="submit" [disabled]="findPlaylistForm.invalid">Buscar Playlist</button>
+  <button type="submit" [disabled]="findPlaylistForm.invalid" class="submit-button">Buscar Playlist</button>
 </form>
 
 <div *ngIf="notFoundMessage" class="error-message">
   <p>{{ notFoundMessage }}</p>
 </div>
 
-<div *ngIf="foundPlaylist">
-  <h3>{{ foundPlaylist.nome }}</h3>
-  <p>{{ foundPlaylist.descricao }}</p>
-  <table>
+<div *ngIf="foundPlaylist" class="found-playlist-container">
+  <h3>{{ foundPlaylist.nome || '-' }}</h3>
+  <p>{{ foundPlaylist.descricao || '-' }}</p>
+  <table class="playlist-table">
     <thead>
     <tr>
       <th>Título</th>
@@ -38,13 +38,20 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let musica of foundPlaylist.musicas">
-      <td>{{ musica.titulo }}</td>
-      <td>{{ musica.artista }}</td>
-      <td>{{ musica.album }}</td>
-      <td>{{ musica.ano }}</td>
-      <td>{{ musica.genero }}</td>
-    </tr>
+    <ng-container *ngIf="foundPlaylist.musicas && foundPlaylist.musicas.length > 0; else noMusicas">
+      <tr *ngFor="let musica of foundPlaylist.musicas">
+        <td>{{ musica.titulo || '-' }}</td>
+        <td>{{ musica.artista || '-' }}</td>
+        <td>{{ musica.album || '-' }}</td>
+        <td>{{ musica.ano || '-' }}</td>
+        <td>{{ musica.genero || '-' }}</td>
+      </tr>
+    </ng-container>
+    <ng-template #noMusicas>
+      <tr class="error-message">
+        <td colspan="5">Nenhuma música encontrada nesta playlist.</td>
+      </tr>
+    </ng-template>
     </tbody>
   </table>
 </div>

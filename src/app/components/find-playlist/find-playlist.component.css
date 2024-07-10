@@ -1,27 +1,30 @@
-table {
+.find-playlist-form {
+  margin-bottom: 20px;
+}
+
+.form-table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
 
-table, th, td {
-  border: 1px solid black;
+.form-table, .form-table th, .form-table td {
+  border: 1px solid #ddd;
 }
 
-th, td {
+.form-table th, .form-table td {
   padding: 10px;
   text-align: left;
 }
 
-th {
-  background-color: #f2f2f2;
+.form-table th {
+  background-color: #45818e;
+  color: white;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
 }
 
-form {
-  margin-bottom: 20px;
-}
-
-input[type="text"], textarea {
+input[type="text"] {
   width: 100%;
   padding: 5px;
   box-sizing: border-box;
@@ -30,7 +33,64 @@ input[type="text"], textarea {
 label {
   display: block;
   margin-bottom: 5px;
-  text-align: center;
+  text-align: left;
+}
+
+.error-message {
+  color: red;
+  font-style: italic;
+  font-size: 0.9em;
+}
+
+.submit-button {
+  padding: 0.5rem 1rem;
+  background-color: #494949;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #3d3d3d;
+}
+
+.found-playlist-container {
+  margin-top: 20px;
+}
+
+.found-playlist-container h3 {
+  margin: 0;
+}
+
+.found-playlist-container p {
+  margin: 0;
+}
+
+.playlist-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.playlist-table th, .playlist-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.playlist-table th {
+  background-color: #45818e;
+  color: white;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+}
+
+.playlist-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.playlist-table tr:hover {
+  background-color: #f1f1f1;
 }
 
 .error-message {

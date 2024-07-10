@@ -1,8 +1,5 @@
-<div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
-<div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-
-<form [formGroup]="playlistForm" (ngSubmit)="criarPlaylist()">
-  <table>
+<form [formGroup]="playlistForm" (ngSubmit)="criarPlaylist()" class="create-playlist-form">
+  <table class="form-table">
     <thead>
     <tr>
       <th>Nome da Playlist</th>
@@ -13,20 +10,17 @@
     <tbody>
     <tr>
       <td>
-        <label for="nome">Nome da Playlist:</label>
         <input type="text" id="nome" formControlName="nome">
         <div *ngIf="playlistForm.get('nome')?.invalid && playlistForm.get('nome')?.touched">
-          <em>Nome da Playlist é obrigatório.</em>
+          <em class="error-message">Nome da Playlist é obrigatório.</em>
         </div>
       </td>
       <td>
-        <label for="descricao">Descrição:</label>
         <textarea id="descricao" formControlName="descricao"></textarea>
       </td>
       <td>
-        <button type="button" (click)="adicionarMusica()">Adicionar Nova Música</button>
         <div formArrayName="musicas">
-          <table *ngIf="musicas.length > 0">
+          <table *ngIf="musicas.length > 0" class="playlist-table">
             <thead>
             <tr>
               <th>Título</th>
@@ -42,7 +36,7 @@
               <td>
                 <input type="text" formControlName="titulo">
                 <div *ngIf="musica.get('titulo')?.invalid && musica.get('titulo')?.touched">
-                  <em>Título da música é obrigatório.</em>
+                  <em class="error-message">Título da música é obrigatório.</em>
                 </div>
               </td>
               <td>
@@ -58,16 +52,20 @@
                 <input type="text" formControlName="genero">
               </td>
               <td>
-                <button type="button" (click)="removerMusica(i)">Remover Música</button>
+                <button type="button" (click)="removerMusica(i)" class="remove-music-button">Remover Música</button>
               </td>
             </tr>
             </tbody>
           </table>
         </div>
+        <button type="button" (click)="adicionarMusica()" class="add-music-button">Adicionar Nova Música</button>
       </td>
     </tr>
     </tbody>
   </table>
 
-  <button type="submit" [disabled]="playlistForm.invalid">Criar Playlist</button>
+  <button type="submit" [disabled]="playlistForm.invalid" class="submit-button">Criar Playlist</button>
 </form>
+
+<div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+<div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>

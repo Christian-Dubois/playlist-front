@@ -28,19 +28,19 @@ export class FindPlaylistComponent implements OnInit {
 
     const listName = this.findPlaylistForm.value.listName;
     this.playlistService.findPlaylistByName(listName).subscribe(
-      (playlist: Playlist) => {
-        this.foundPlaylist = playlist;
-        this.notFoundMessage = undefined;
-      },
-      (error) => {
-        console.error('Erro ao buscar playlist:', error);
-        this.foundPlaylist = undefined;
-        if (error.status === 404) {
-          this.notFoundMessage = 'Playlist não encontrada.';
-        } else {
-          this.notFoundMessage = 'Erro ao acessar o servidor. Por favor, tente novamente mais tarde.';
+        (playlist: Playlist) => {
+          this.foundPlaylist = playlist;
+          this.notFoundMessage = undefined;
+        },
+        (error) => {
+          console.error('Erro ao buscar playlist:', error);
+          this.foundPlaylist = undefined;
+          if (error.status === 404) {
+            this.notFoundMessage = 'Playlist não encontrada.';
+          } else {
+            this.notFoundMessage = 'Erro ao acessar o servidor. Por favor, tente novamente mais tarde.';
+          }
         }
-      }
     );
   }
 }

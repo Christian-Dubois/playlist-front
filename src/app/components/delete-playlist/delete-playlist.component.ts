@@ -10,6 +10,8 @@ import { PlaylistService } from '../../services/playlist.service';
 export class DeletePlaylistComponent implements OnInit {
   playlists: Playlist[] = [];
   selectedPlaylist: Playlist | null = null;
+  deleteSuccessMessage: string | null = null;
+  deleteErrorMessage: string | null = null;
 
   constructor(private playlistService: PlaylistService) { }
 
@@ -20,7 +22,12 @@ export class DeletePlaylistComponent implements OnInit {
   loadPlaylists(): void {
     this.playlistService.findAllPlaylists().subscribe(
       (data: { playlists: Playlist[] }) => {
-        this.playlists = data.playlists;
+        if (data && data.playlists && data.playlists.length > 0) {
+          this.playlists = data.playlists;
+        } else {
+          this.playlists = [];
+          this.selectedPlaylist = null;
+        }
       },
       (error: any) => {
         console.error('Erro ao carregar playlists:', error);
@@ -37,17 +44,20 @@ export class DeletePlaylistComponent implements OnInit {
     this.playlistService.deletePlaylist(this.selectedPlaylist.nome).subscribe(
       () => {
         console.log('Playlist deletada com sucesso.');
-        this.selectedPlaylist = null; // Limpa a playlist selecionada após a exclusão
-        this.loadPlaylists(); // Recarrega a lista de playlists após a exclusão
+        this.deleteSuccessMessage = 'Playlist deletada com sucesso.';
+        this.deleteErrorMessage = null;
+        this.selectedPlaylist = null;
+        this.loadPlaylists();
       },
       (error: any) => {
-        console.error('Erro ao deletar playlist:', error);
+        this.deleteErrorMessage = 'Não foi possível deletar a playlist.';
+        this.deleteSuccessMessage = null;
       }
     );
   }
 
   selectPlaylist(target: EventTarget | null): void {
-    this.playlistService.findPlaylistByName((target as HTMLInputElement).value).subscribe(
+    this.playlistService.findPlaylistByName((target as HTMLSelectElement).value).subscribe(
       (playlist: Playlist) => {
         this.selectedPlaylist = playlist;
       },

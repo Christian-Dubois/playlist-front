@@ -1,25 +1,27 @@
-table {
+.create-playlist-form {
+  margin-bottom: 20px;
+}
+
+.form-table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
 
-table, th, td {
-  border: 1px solid black;
+.form-table, .form-table th, .form-table td {
+  border: 1px solid #ddd;
 }
 
-th, td {
+.form-table th, .form-table td {
   padding: 10px;
   text-align: left;
-  vertical-align: middle; /* Centraliza verticalmente */
 }
 
-th {
-  background-color: #f2f2f2;
-}
-
-form {
-  margin-bottom: 20px;
+.form-table th {
+  background-color: #45818e;
+  color: white;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
 }
 
 input[type="text"], textarea {
@@ -31,9 +33,10 @@ input[type="text"], textarea {
 label {
   display: block;
   margin-bottom: 5px;
+  text-align: left;
 }
 
-em {
+.error-message {
   color: red;
   font-style: italic;
   font-size: 0.9em;
@@ -49,4 +52,50 @@ em {
   color: red;
   font-weight: bold;
   margin-bottom: 10px;
+}
+
+.add-music-button, .remove-music-button, .submit-button {
+  padding: 8px 16px;
+  background-color: #494949;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.add-music-button:hover, .remove-music-button:hover, .submit-button:hover {
+  background-color: #393939;
+}
+
+
+.submit-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.playlist-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.playlist-table th, .playlist-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.playlist-table th {
+  background-color: #45818e;
+  color: white;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+}
+
+.playlist-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.playlist-table tr:hover {
+  background-color: #f1f1f1;
 }

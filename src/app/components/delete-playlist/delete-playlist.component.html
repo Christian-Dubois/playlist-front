@@ -1,16 +1,15 @@
-<div>
-  <h2>Deletar Playlist</h2>
-  <label for="playlistSelect">Selecione a Playlist:</label>
+<div class="delete-playlist-container">
+  <label for="playlistSelect">Selecione a Playlist para deletar:</label>
   <select id="playlistSelect" (change)="selectPlaylist($event.target)">
     <option value="">Selecione...</option>
     <option *ngFor="let playlist of playlists" [value]="playlist.nome">{{ playlist.nome }}</option>
   </select>
-  <button type="button" (click)="deletePlaylist()" class="delete-button">Deletar Playlist</button>
+  <button type="button" (click)="deletePlaylist()" class="delete-button" [disabled]="!selectedPlaylist">Deletar Playlist</button>
 </div>
 
-<div *ngIf="selectedPlaylist">
-  <h3>{{ selectedPlaylist.nome }}</h3>
-  <p>{{ selectedPlaylist.descricao }}</p>
+<div *ngIf="selectedPlaylist" class="selected-playlist-container">
+  <h3>{{ selectedPlaylist.nome || '-' }}</h3>
+  <p>{{ selectedPlaylist.descricao || '-' }}</p>
   <table class="playlist-table">
     <thead>
     <tr>
@@ -21,14 +20,19 @@
       <th>Gênero</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="selectedPlaylist.musicas && selectedPlaylist.musicas.length > 0; else noMusicas">
     <tr *ngFor="let musica of selectedPlaylist.musicas">
-      <td>{{ musica.titulo }}</td>
-      <td>{{ musica.artista }}</td>
-      <td>{{ musica.album }}</td>
-      <td>{{ musica.ano }}</td>
-      <td>{{ musica.genero }}</td>
+      <td>{{ musica.titulo || '-' }}</td>
+      <td>{{ musica.artista || '-' }}</td>
+      <td>{{ musica.album || '-' }}</td>
+      <td>{{ musica.ano || '-' }}</td>
+      <td>{{ musica.genero || '-' }}</td>
     </tr>
     </tbody>
+    <ng-template #noMusicas>
+      <tr class="error-message">
+        <td colspan="5">Nenhuma música encontrada nesta playlist.</td>
+      </tr>
+    </ng-template>
   </table>
 </div>

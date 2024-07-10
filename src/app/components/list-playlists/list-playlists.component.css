@@ -2,6 +2,31 @@
   margin-bottom: 20px;
 }
 
+.separator {
+  height: 2px;
+  background-color: #76a5af;
+  margin: 20px 0;
+}
+
+.playlist-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.playlist-table td.label {
+  font-weight: bold;
+  width: 100px;
+}
+
+.playlist-table td {
+  padding: 8px;
+}
+
+.playlist-table h3 {
+  margin: 0;
+}
+
 .musics-table {
   width: 100%;
   border-collapse: collapse;
@@ -15,7 +40,10 @@
 }
 
 .musics-table th {
-  background-color: #f2f2f2;
+  background-color: #45818e;
+  color: white;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
 }
 
 .musics-table tr:nth-child(even) {
